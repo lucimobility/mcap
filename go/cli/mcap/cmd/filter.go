@@ -187,15 +187,6 @@ func filter(
 		ValidateChunkCRCs: true,
 		EmitInvalidChunks: opts.recover,
 		AttachmentCallback: func(ar *mcap.AttachmentReader) error {
-			if !opts.includeAttachments {
-				return nil
-			}
-			if ar.LogTime < opts.start {
-				return nil
-			}
-			if ar.LogTime >= opts.end {
-				return nil
-			}
 			err = mcapWriter.WriteAttachment(&mcap.Attachment{
 				LogTime:    ar.LogTime,
 				CreateTime: ar.CreateTime,
